@@ -26,7 +26,16 @@ local plugins = {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
       dependencies = { 'nvim-lua/plenary.nvim' }
     },
-  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}
+  {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", 
+      "MunifTanjim/nui.nvim",
+    }
+  }
 }
 
 --lazy.vim call on startup
@@ -36,6 +45,10 @@ require("lazy").setup(plugins)
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+
+--keymap for Neotree
+vim.keymap.set('n', '<C-n>', ':Neotree<CR>')
+vim.keymap.set('n', '<C-c>', ':Neotree close<CR>')
 
 --enables language parsers
 local config = require("nvim-treesitter.configs")
